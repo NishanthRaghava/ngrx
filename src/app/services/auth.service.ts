@@ -1,9 +1,10 @@
-import { Observable } from 'rxjs';
+import { User } from 'src/app/models/user.model';
+import { Observable, timeout } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { HttpClient, } from '@angular/common/http';
 import { Injectable } from '@angular/core'
 import { AuthResponseData } from '../models/AuthResponseData.model';
-import { User } from '../models/user.model';
+
 
 
 
@@ -12,6 +13,7 @@ import { User } from '../models/user.model';
 })
 
 export class AuthService {
+    timeoutInterval : any;
     constructor(private http: HttpClient){}
         login(email: String, password: String): Observable<AuthResponseData> {
             return this.http.post<AuthResponseData>(
@@ -36,8 +38,37 @@ export class AuthService {
                     return 'Email Not Found';
                 case 'INVALID_PASSWORD':
                     return 'Invalid Password';
+                case 'EMAIL_EXISTS':
+                    return 'Email is already exist';
                 default:
                     return 'Unknown Error Occured';
             }
+        }
+        setUserInLocoalStorage(user: User){
+            localStorage.setItem('userData',JSON.stringify(user));
+            this.runTimeoutInterval(user);
+            
+        }
+
+        runTimeoutInterval(user: User){
+            const todaysDate = new Date().getTime();
+            const expirationDate = user.expireDate.getTime();
+            const timeInterval = expirationDate - todaysDate;
+
+            this.timeoutInterval=setTimeout(()=>{
+
+            },timeInterval)
+        }
+
+        getUserFromLocalStorage(){
+            const userDataStirng = localStorage.getItem('userData');
+            if(userDataStirng){
+                const userData = JSON.parse(userDataStirng);
+                const expirationDate = new Date(userData.expirationDate) 
+                const user = new User(userData.email,userData.token,userData.localId,expirationDate)
+                this.runTimeoutInterval(user)
+                return user;
+            }
+            return null;
         }
 }

@@ -1,3 +1,4 @@
+import { AuthEffects } from './auth/state/auth.effects';
 import { environment } from './../environments/environment.prod';
 import { appReducer } from './store/app.state';
 import {  NgModule } from '@angular/core';
@@ -42,7 +43,7 @@ import { LoadingSpinnerComponent } from './shared/components/loading-spinner/loa
     AppRoutingModule,
     // StoreModule.forRoot(appReducer),
     HttpClientModule,
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([AuthEffects]),
     StoreModule.forRoot(appReducer),
     StoreDevtoolsModule.instrument({
 
