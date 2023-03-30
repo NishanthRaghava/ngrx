@@ -1,3 +1,4 @@
+import { autologout } from './../../../auth/state/auth.action';
 import { Observable } from 'rxjs';
 import { isAuthenticated } from './../../../auth/state/auth.selector';
 import { AppState } from './../../../store/app.state';
@@ -19,6 +20,7 @@ export class HeaderComponent implements OnInit {
 
   onLogout(event: Event){
     event.preventDefault();
+    this.store.dispatch(autologout());
   }
 
 }

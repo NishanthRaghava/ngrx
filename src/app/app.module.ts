@@ -20,7 +20,8 @@ import { HeaderComponent } from './shared/components/header/header.component';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
-import { LoadingSpinnerComponent } from './shared/components/loading-spinner/loading-spinner.component'
+import { LoadingSpinnerComponent } from './shared/components/loading-spinner/loading-spinner.component';
+import { EditpostComponent } from './posts/editpost/editpost.component'
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { LoadingSpinnerComponent } from './shared/components/loading-spinner/loa
     HomeComponent,
     HeaderComponent,
     LoadingSpinnerComponent,
+    // EditpostComponent,
     // PostsListComponent,
     // AddPostComponent
   ],

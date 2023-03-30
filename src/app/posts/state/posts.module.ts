@@ -1,3 +1,4 @@
+import { EditpostComponent } from './../editpost/editpost.component';
 import { POSTS_STATE_NAME } from './posts.selector';
 import { StoreModule } from '@ngrx/store';
 import { AddPostComponent } from './../add-post/add-post.component';
@@ -14,7 +15,8 @@ const routes: Routes =[
         path:'',
         component:PostsListComponent,
         children: [
-            {path:'add', component:AddPostComponent}
+            {path:'add', component:AddPostComponent},
+            {path:'edit/:id', component:EditpostComponent}
         ]
     },
 ];
@@ -28,7 +30,8 @@ const routes: Routes =[
     ],
     declarations:[
          PostsListComponent,
-         AddPostComponent
+         AddPostComponent,
+         EditpostComponent,
     ]
 })
 export class PostsModule{

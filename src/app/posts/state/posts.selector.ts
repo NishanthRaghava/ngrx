@@ -1,4 +1,4 @@
-import { createFeatureSelector,createSelector } from '@ngrx/store';
+import { createFeatureSelector, createSelector, props } from '@ngrx/store';
 import { PostsState } from "./posts.state";
 
 export const POSTS_STATE_NAME = 'posts';
@@ -8,4 +8,9 @@ export const getPosts = createSelector(getPostsState, (state)=> {
     
     console.log(state.posts);
     return state.posts;
+});
+
+export const getpostById = createSelector(getPostsState, (state, props)=>{
+    // console.log(props);
+    return state.posts.find((post)=> post.id === props.id);
 });

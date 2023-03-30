@@ -11,13 +11,15 @@
                     <th>ID</th>
                     <th>Title</th>
                     <th>Description</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let post of posts | async">
                     <td>{{post.id}}</td>
                     <td>{{post.title}}</td>
-                    <td>{{post.description}}</td>
+                   <td>{{post.description}}</td>
+                   <td><a class="btn btn-primary" [routerLink]="['edit',post.id]">Update</a></td>
                 </tr>
             </tbody>
         </table>

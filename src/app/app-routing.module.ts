@@ -1,3 +1,4 @@
+import { EditpostComponent } from './posts/editpost/editpost.component';
 import { AddPostComponent } from './posts/add-post/add-post.component';
 // import { PostsListComponent } from './posts/posts-list/posts-list.component';
 // import { CounterComponent } from './counter/counter/counter.component';
@@ -20,6 +21,7 @@ const routes : Routes =[
         // children: [
         //     {path:'add', component:AddPostComponent}
         // ]
+       
     },
     {
         path:'auth',
