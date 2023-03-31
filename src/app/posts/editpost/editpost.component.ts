@@ -1,3 +1,4 @@
+import { updatePost } from './../state/posts.action';
 import { Subscription } from 'rxjs';
 import { getpostById } from './../state/posts.selector';
 import { AppState } from './../../store/app.state';
@@ -5,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { Post } from './../../models/posts.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-editpost',
@@ -17,7 +18,11 @@ export class EditpostComponent implements OnInit, OnDestroy {
   postForm : FormGroup;
   postSubsrciption: Subscription;
 
-  constructor(private route: ActivatedRoute, private store: Store<AppState>){}
+  constructor(
+    private route: ActivatedRoute,
+    private store: Store<AppState>,
+    private router: Router,
+     ){}
 
   ngOnInit(){
     this.route.paramMap.subscribe((params)=>{
@@ -51,8 +56,12 @@ export class EditpostComponent implements OnInit, OnDestroy {
      const description = this.postForm.value.description;
 
     const post : Post={
-      id : this.post.id
+      id: this.post.id,
+      title,
+      description,
     }
      //dispatch the action
+     this.store.dispatch(updatePost({post}));
+     this.router.navigate(['posts'])
   }
 }

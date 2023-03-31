@@ -20,8 +20,7 @@ const routes : Routes =[
         loadChildren: () => import('./posts/state/posts.module').then(m=> m.PostsModule),
         // children: [
         //     {path:'add', component:AddPostComponent}
-        // ]
-       
+        // ]  
     },
     {
         path:'auth',

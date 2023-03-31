@@ -1,10 +1,10 @@
-
-import { addPost } from './../state/posts.action';
+import { addPost,  createPost } from './../state/posts.action';
 import { AppState } from './../../store/app.state';
-import { Store } from '@ngrx/store';
+import { Store, props } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Post } from 'src/app/models/posts.model';
+import { Postsservices } from 'src/app/services/posts.service';
 
 @Component({
   selector: 'app-add-post',
@@ -14,7 +14,7 @@ import { Post } from 'src/app/models/posts.model';
 export class AddPostComponent implements OnInit {
   postForm: FormGroup;
 
-  constructor(private store: Store<AppState>) {
+  constructor(private store: Store<AppState>, private service: Postsservices ) {
 
   }
 
@@ -44,17 +44,34 @@ export class AddPostComponent implements OnInit {
       return null;
   }
 
+  // onAddPost(){
+    
+  //   if(!this.postForm.valid){
+  //     return;
+  //   }
+  //   console.log(this.postForm.value);
+  //   const post: Post = { 
+  //     title: this.postForm.value.title,
+  //     description: this.postForm.value.description
+  //   }
+  //   this.store.dispatch(addPost({ post }));
+  //   this.service.createposts({post:post});
+
+  //   // this.store.dispatch(addPosts({ post }))
+  // }
+
   onAddPost(){
     
     if(!this.postForm.valid){
-      return;
+       return;
     }
-    console.log(this.postForm.value);
-
-    const post: Post = {
+    const post: Post = { 
       title: this.postForm.value.title,
       description: this.postForm.value.description
     }
-    this.store.dispatch(addPost({ post }));
+    this.store.dispatch(createPost({ post }));
+    
+    console.log(post);
+    
   }
 }
