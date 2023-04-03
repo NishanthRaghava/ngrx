@@ -1,5 +1,5 @@
 import { mergeMap, map } from 'rxjs/operators';
-import { createPost, createPostSuccess } from './posts.action';
+import { createPost, createPostSuccess, loadPost, loadPostSuccess } from './posts.action';
 import { Router } from '@angular/router';
 import { AppState } from './../../store/app.state';
 import { Store } from '@ngrx/store';
@@ -17,19 +17,33 @@ export class PostsEffect{
         private router: Router,
     ){}
 
-    addPost$ = createEffect(() => {
-        return this.action$.pipe(
-          ofType(createPost),
-          mergeMap((action) => {
-            console.log(action)
-            return this.service.createposts(action.post).pipe(
-              map((data) => {
-                console.log(data,"servic post")
-                const post = { ...action.post,id:data.name };
-                return createPostSuccess({ post });
-              })
-            );
-          })
-        );
-      }); 
+    // addPost$ = createEffect(() => {
+    //     return this.action$.pipe(
+    //       ofType(createPost),
+    //       mergeMap((action) => {
+    //         console.log(action)
+    //         return this.service.createposts(action.post).pipe(
+    //           map((data) => {
+    //             console.log(data,"servic post")
+    //             const post = { ...action.post,id:data.name };
+    //             return createPostSuccess({ post });
+    //           })
+    //         );
+    //       })
+    //     );
+    //   }); 
+    
+    loadPost$ = createEffect(()=>{
+      return this.action$.pipe(
+        ofType(loadPost),
+        mergeMap((action)=>{
+          return this.service.getposts().pipe(
+            map((posts)=>{
+              // console.log(data,"get data from the service");
+              return loadPostSuccess({ posts })
+            })
+          )
+        })
+      )
+    });
 }
