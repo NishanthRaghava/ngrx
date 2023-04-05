@@ -71,7 +71,7 @@ export class AddPostComponent implements OnInit {
     }
     this.store.dispatch(addPost({ post }));
     
-    console.log(post);
+    // console.log(post);
     
   }
 }
