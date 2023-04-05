@@ -1,4 +1,4 @@
-import { addPost,  createPost } from './../state/posts.action';
+import { addPost} from './../state/posts.action';
 import { AppState } from './../../store/app.state';
 import { Store, props } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
@@ -69,7 +69,7 @@ export class AddPostComponent implements OnInit {
       title: this.postForm.value.title,
       description: this.postForm.value.description
     }
-    this.store.dispatch(createPost({ post }));
+    this.store.dispatch(addPost({ post }));
     
     console.log(post);
     

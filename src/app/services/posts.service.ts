@@ -18,8 +18,9 @@ export class Postsservices{
     //     })
     // }
 
-    createposts(post:Post):Observable<any>{
-        return this.http.post<any>('https://redux-73e30-default-rtdb.firebaseio.com/posts.json', post);
+    createposts(post:Post):Observable<{name: string}>{
+        return this.http.post<{name: string}>
+        ('https://redux-73e30-default-rtdb.firebaseio.com/posts.json', post);
     }
 
     getposts(): Observable<Post[]>{
@@ -32,5 +33,12 @@ export class Postsservices{
             }
             return posts;
         }))
+    }
+    updateposts(post:Post){
+        const postData = {[post.id]: {title: post.title, description: post.description}}
+        return this.http.patch(`https://redux-73e30-default-rtdb.firebaseio.com/posts.json`,postData);
+    }
+    deleteposts(id: String){
+        return this.http.delete(`https://redux-73e30-default-rtdb.firebaseio.com/posts/${id}.json`)
     }
 }
